@@ -18,7 +18,7 @@ const client = new S3Client({
  *
  * @param {Function} transformer a function that can be run to transform the response received from S3.
  */
-async function listObjects(transformers) {
+async function listObjects(transformers = []) {
   let objects = [];
   let continueListing = true; // should we keep fetching?
   let ContinuationToken; // what's the continuation token to use in the next pass?

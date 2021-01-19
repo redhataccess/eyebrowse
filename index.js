@@ -42,9 +42,9 @@ keystone.createList("File", {
   },
 });
 
-//////////////////////////
-//  PROCESS "SYMLINKS"  //
-//////////////////////////
+///////////////////////////////////
+//  S3 CACHING PROOF OF CONCEPT  //
+///////////////////////////////////
 
 (async () => {
   console.log(`------------------`);
@@ -111,15 +111,6 @@ keystone.createList("File", {
   } catch (e) {
     console.error(e);
   }
-})();
-
-///////////////////////////////////
-//  S3 CACHING PROOF OF CONCEPT  //
-///////////////////////////////////
-
-(async () => {
-  const objs = await s3list.listObjects();
-  console.log(objs);
 })();
 
 module.exports = {
