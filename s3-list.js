@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { S3Client, ListObjectsV2Command } = require("@aws-sdk/client-s3");
 const axios = require("axios");
+const { get } = require("lodash");
 const envs = require("./envs");
 
 const client = new S3Client({
@@ -53,9 +54,10 @@ async function listObjects(transformers = []) {
 
 /**
  * Given an S3 object (from .Contents[]), fetch it and return the path to the
- * file it's linking to.
+ * file it's linking to.  Adds a new .Target property, and mutates the Key (to
+ * remove 'link__')
  */
-async function resolveSymlink(obj) {
+async function resolveSymlink(obj, key, array) {
   // if the obj isn't a "symlink", just return the filepath (.Key)
   if (!obj.Key.startsWith("link__")) {
     return obj;
@@ -66,7 +68,15 @@ async function resolveSymlink(obj) {
   try {
     const response = await axios.get(url, { responseType: "text" });
     const target = response.data.split("\n")[0].trim();
-    obj.Key = target;
+    // const targetUrl = new URL(target, getS3ObjectUrl(obj)).href;
+    // console.log({target}, {targetUrl});
+    obj.Target = target;
+
+    // get the size of the target.  this only makes sense when the link target
+    // is a file, not a "directory", so sometimes no size will be found.  in
+    // that case, the size will be undefined, which is just fine.
+    obj.Size = get(array, { name: target });
+    obj.Key = obj.Key.replace("link__", "");
   } catch (e) {
     console.error(e);
   }
@@ -90,6 +100,7 @@ function getS3ObjectUrl(obj) {
 function toFileSchema(s3obj) {
   return {
     name: s3obj.Key,
+    target: s3obj.Target,
     size: s3obj.Size,
     lastModified: s3obj.LastModified.toUTCString(),
     lastCached: new Date().toUTCString(),

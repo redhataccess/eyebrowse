@@ -7,6 +7,7 @@ const { StaticApp } = require("@keystonejs/app-static");
 const { MongooseAdapter: Adapter } = require("@keystonejs/adapter-mongoose");
 const s3list = require("./s3-list");
 const envs = require("./envs");
+const { buildTree } = require("./tree");
 
 /////////////////////
 //  KEYSTONE INIT  //
@@ -28,7 +29,14 @@ keystone.createList("File", {
       type: Virtual,
       schemaDoc: "The public URL for this object",
       resolver: (item) =>
-        `https://${envs.bucketName}.s3.amazonaws.com/${item.name}`,
+        `https://${envs.bucketName}.s3.amazonaws.com/${
+          item.target || item.name
+        }`,
+    },
+    target: {
+      type: Text,
+      schemaDoc:
+        "A relative path to a target file in the same file store.  Used to implement symlink-like behavior.",
     },
     size: { type: Float, schemaDoc: "The filesize, in bytes, of this object" },
     lastModified: {
@@ -55,12 +63,15 @@ keystone.createList("File", {
     s3list.resolveSymlink,
     s3list.toFileSchema,
   ]);
+
   console.log(s3objs);
 
   const idQuery = `
     query {
       allFiles {
         id
+        name
+        target
       }
     }
   `;
@@ -120,4 +131,36 @@ module.exports = {
     new StaticApp({ path: "/", src: "public" }),
     new AdminUIApp({ name: PROJECT_NAME, enableDefaultRoute: true }),
   ],
+  configureExpress: (app) => {
+    app.set("trust proxy", true);
+
+    app.get("/files", async (req, res) => {
+      const clientFileList = await keystone.executeGraphQL({
+        context: keystone.createContext(),
+        query: `query {
+          allFiles {
+            id
+            name
+            target
+            size
+            url
+            lastModified
+            lastCached
+          }
+        }`,
+      });
+
+      const data = {
+        allFiles: clientFileList.data.allFiles,
+        fileTree: buildTree(clientFileList.data.allFiles),
+      };
+
+      //
+
+      res.type("json").send({
+        status: "success",
+        data,
+      });
+    });
+  },
 };
