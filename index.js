@@ -24,7 +24,15 @@ keystone.createList("File", {
   schemaDoc:
     "A list of files which reside in a remote filestore, whose metadata is cached within Eyebrowse.",
   fields: {
-    name: { type: Text, schemaDoc: "The path and name of this object" },
+    name: { type: Text, schemaDoc: "The filename of this object" },
+    path: {
+      type: Text,
+      schemaDoc: "The absolute file path of this object.",
+    },
+    parent: {
+      type: Text,
+      schemaDoc: "The absolute file path of the parent directory of this.",
+    },
     url: {
       type: Virtual,
       schemaDoc: "The public URL for this object",
@@ -36,7 +44,7 @@ keystone.createList("File", {
     target: {
       type: Text,
       schemaDoc:
-        "A relative path to a target file in the same file store.  Used to implement symlink-like behavior.",
+        "An absolute path to a target file in the same file store.  Used to implement symlink-like behavior.",
     },
     size: { type: Float, schemaDoc: "The filesize, in bytes, of this object" },
     lastModified: {
@@ -66,19 +74,20 @@ keystone.createList("File", {
 
   console.log(s3objs);
 
+  console.log(`------------------`);
+  console.log(`RUNNING ID QUERY   `);
+  console.log(`------------------`);
+
   const idQuery = `
     query {
       allFiles {
         id
         name
+        path
         target
       }
     }
   `;
-
-  console.log(`------------------`);
-  console.log(`RUNNING ID QUERY   `);
-  console.log(`------------------`);
 
   const idQueryResponse = await keystone.executeGraphQL({
     context: keystone.createContext(), // skip access control for auth checking
@@ -111,7 +120,7 @@ keystone.createList("File", {
     newFiles: s3objs.map((o) => ({ data: o })),
   };
 
-  console.log(replaceFilesVariables);
+  console.log(replaceFilesVariables.newFiles);
 
   try {
     const replaceFilesQueryResponse = await keystone.executeGraphQL({
@@ -141,6 +150,8 @@ module.exports = {
           allFiles {
             id
             name
+            path
+            parent
             target
             size
             url

@@ -1,25 +1,60 @@
-const { setWith, get, reduce, filter } = require("lodash");
+const { set, get, reduce, filter, last } = require("lodash");
 
+/**
+ * Turn a flat array of eyebrowse File objects into a nested tree structure
+ * based on the .path property.
+ *
+ * For example, a file with a path of "foo/bar/baz.md" would be placed into a
+ * tree like this:
+ *
+ * {
+ *   foo: {
+ *     children: {
+ *       bar: {
+ *         children: {
+ *           "baz.md": {
+ *             name: "baz.md",
+ *             path: "foo/bar/baz.md",
+ *             size: 1234,
+ *             // ... other properties, etc
+ *           }
+ *         }
+ *       }
+ *     }
+ *   }
+ * }
+ */
 function buildTree(files) {
   const tree = reduce(
     files,
     (acc, file) => {
-      setWith(acc, file.name.split("/"), file, (nsValue, key, nsObject) => {
-        return { ...nsValue };
-      });
-      return acc;
+      console.log("building tree component for", file);
+      return set(
+        { ...acc }, // clone the accumulator to avoid mutating it
+        nestPath(file.path), // nest the path (add .children at each dir step)
+        file
+      );
     },
     {}
   );
 
   // set up targetOf reverse links
   filter(files, "target").forEach((link) => {
-    const linkTarget = get(tree, link.target.split("/"));
+    console.log("assigning targetOf to target of ", link);
+    const linkTarget = get(tree, nestPath(link.target));
     linkTarget.targetOf = link.name;
     console.log({ link, linkTarget });
   });
 
   return tree;
+}
+
+/**
+ * Turn a path string, /-delimited, into a path array with "children"
+ * properties inseretd between each directory boundary.
+ */
+function nestPath(path) {
+  return path.replace(/\//g, "/children/").split("/");
 }
 
 module.exports = {
@@ -29,38 +64,44 @@ module.exports = {
 if (require.main === module) {
   const tree = buildTree([
     {
-      id: "600f06291614158fafb8b87b",
       name: "latest",
+      path: "latest",
       target: "v2.0.3",
       size: undefined,
-      url: "https://eyebrowse-test-1.s3.amazonaws.com/v2.0.3",
-      lastModified: "2021-01-14T16:57:00.000Z",
-      lastCached: "2021-01-25T17:55:53.000Z",
+      lastModified: "Thu, 14 Jan 2021 16:57:00 GMT",
+      lastCached: "Tue, 26 Jan 2021 16:41:37 GMT",
     },
     {
-      id: "600f06291614159fafb8b87b",
       name: "latest_sum",
+      path: "latest_sum",
       target: "v2.0.3/sha256sum.txt",
       size: 1044,
-      url: "https://eyebrowse-test-1.s3.amazonaws.com/v2.0.3/sha256sum.txt",
-      lastModified: "2021-01-14T16:58:00.000Z",
-      lastCached: "2021-01-25T17:56:53.000Z",
+      lastModified: "Thu, 14 Jan 2021 16:57:00 GMT",
+      lastCached: "Tue, 26 Jan 2021 16:41:37 GMT",
     },
     {
-      id: "600f06291614158fafb8b87c",
-      name: "v2.0.2/sha256sum.txt",
-      target: null,
+      name: "sha256sum.txt",
+      path: "v2.0.2/sha256sum.txt",
+      target: undefined,
       size: 1044,
-      url: "https://eyebrowse-test-1.s3.amazonaws.com/v2.0.2/sha256sum.txt",
-      lastModified: "2021-01-14T16:57:01.000Z",
-      lastCached: "2021-01-25T17:55:53.000Z",
+      lastModified: "Thu, 14 Jan 2021 16:57:01 GMT",
+      lastCached: "Tue, 26 Jan 2021 16:41:37 GMT",
+    },
+    {
+      name: "sha256sum.txt",
+      path: "v2.0.3/sha256sum.txt",
+      target: undefined,
+      size: 1044,
+      lastModified: "Thu, 14 Jan 2021 16:57:00 GMT",
+      lastCached: "Tue, 26 Jan 2021 16:41:37 GMT",
     },
     {
       id: "600f06291614158fafb8b87d",
-      name: "v2.0.3/sha256sum.txt",
+      name: "readme.md",
+      path: "v2.0.3/docs/readme.md",
       target: null,
-      size: 1044,
-      url: "https://eyebrowse-test-1.s3.amazonaws.com/v2.0.3/sha256sum.txt",
+      size: 362623,
+      url: "https://eyebrowse-test-1.s3.amazonaws.com/v2.0.3/docs/readme.md",
       lastModified: "2021-01-14T16:57:00.000Z",
       lastCached: "2021-01-25T17:55:53.000Z",
     },

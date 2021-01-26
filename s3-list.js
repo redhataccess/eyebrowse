@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { S3Client, ListObjectsV2Command } = require("@aws-sdk/client-s3");
 const axios = require("axios");
-const { get } = require("lodash");
+const { get, find, last, dropRight } = require("lodash");
 const envs = require("./envs");
 
 const client = new S3Client({
@@ -67,15 +67,19 @@ async function resolveSymlink(obj, key, array) {
   const url = getS3ObjectUrl(obj);
   try {
     const response = await axios.get(url, { responseType: "text" });
-    const target = response.data.split("\n")[0].trim();
+    const targetName = response.data.split("\n")[0].trim();
+    const targetObj = find(array, { Key: targetName }) || {};
     // const targetUrl = new URL(target, getS3ObjectUrl(obj)).href;
     // console.log({target}, {targetUrl});
-    obj.Target = target;
+    obj.Target = targetName;
 
-    // get the size of the target.  this only makes sense when the link target
-    // is a file, not a "directory", so sometimes no size will be found.  in
-    // that case, the size will be undefined, which is just fine.
-    obj.Size = get(array, { name: target });
+    // copy in the size and lastModified of the target.  if the target is a
+    // "folder", no values will be copied in, so fall back to the link's
+    // values.
+    obj.Size = targetObj.Size || obj.Size;
+    obj.LastModified = targetObj.LastModified || obj.LastModified;
+
+    // remove the link__ prefix from the "filename"
     obj.Key = obj.Key.replace("link__", "");
   } catch (e) {
     console.error(e);
@@ -98,8 +102,11 @@ function getS3ObjectUrl(obj) {
  * Eyebrowse File schema.
  */
 function toFileSchema(s3obj) {
+  const pathArray = s3obj.Key.split("/");
   return {
-    name: s3obj.Key,
+    name: last(pathArray),
+    path: s3obj.Key,
+    parent: dropRight(pathArray).join("/"),
     target: s3obj.Target,
     size: s3obj.Size,
     lastModified: s3obj.LastModified.toUTCString(),
