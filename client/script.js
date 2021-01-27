@@ -15,6 +15,16 @@ async function fetchData() {
 }
 
 (async () => {
+  const app = new Vue({
+    el: "#app",
+    data: {
+      fileTree: {}
+    },
+    render: () => `hello`
+  });
+
   const data = await fetchData();
-  document.querySelector("pre").innerText = JSON.stringify(data.data, null, 4);
+
+  app.fileTree = data.fileTree;
+  // document.querySelector("pre").innerText = JSON.stringify(data.data, null, 4);
 })();
