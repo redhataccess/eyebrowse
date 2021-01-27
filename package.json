@@ -25,6 +25,7 @@
     "@keystonejs/fields": "^21.0.0",
     "@keystonejs/keystone": "^18.0.0",
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "lodash-es": "^4.17.20"

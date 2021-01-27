@@ -8,6 +8,7 @@ const { MongooseAdapter: Adapter } = require("@keystonejs/adapter-mongoose");
 const s3list = require("./s3-list");
 const envs = require("./envs");
 const { buildTree } = require("./tree");
+const cors = require("cors");
 
 /////////////////////
 //  KEYSTONE INIT  //
@@ -141,6 +142,7 @@ module.exports = {
     new AdminUIApp({ name: PROJECT_NAME, enableDefaultRoute: true }),
   ],
   configureExpress: (app) => {
+    app.use(cors());
     app.set("trust proxy", true);
 
     app.get("/files", async (req, res) => {
