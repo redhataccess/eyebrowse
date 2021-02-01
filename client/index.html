@@ -5,11 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Keystone To-Do List</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <script type="module" src="script.js"></script>
+    <div id="app">
+      {{ appName }}
+      <table>
 
-    <div id="app"></div>
+        <thead>
+          <tr>
+            <th>Filename</th>
+            <th>Last modified</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="file in allFiles">
+            <td>
+              <pfe-icon v-if="!file.dir" icon="rh-paper"></pfe-icon>
+              <pfe-icon v-if="file.dir" icon="rh-folder-open"></pfe-icon>
+              {{ file.path }}
+              <span class="link-path">{{ file.target ? ` ➞ ${file.target}` : ""}}</span>
+            </td>
+            <td>
+              <pfe-datetime v-if="!file.dir" type="local" day="numeric" month="long" year="numeric" v-bind:datetime="file.lastModified">
+                {{ file.lastModified }}
+              </pfe-datetime>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+    <script type="module" src="script.js"></script>
   </body>
 </html>

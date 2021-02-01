@@ -28,7 +28,6 @@ function buildTree(files) {
   const tree = reduce(
     files,
     (acc, file) => {
-      console.log("building tree component for", file);
       return set(
         { ...acc }, // clone the accumulator to avoid mutating it
         nestPath(file.path), // nest the path (add .children at each dir step)
@@ -38,13 +37,14 @@ function buildTree(files) {
     {}
   );
 
-  // set up targetOf reverse links
-  filter(files, "target").forEach((link) => {
-    console.log("assigning targetOf to target of ", link);
-    const linkTarget = get(tree, nestPath(link.target));
-    linkTarget.targetOf = link.name;
-    console.log({ link, linkTarget });
-  });
+  // set up targetOf reverse links.
+  // DISABLED for now due to depth pagination, it isn't able to look up the
+  // targetOf successfully. Re-enable when I find a way to query graphql for
+  // this.
+  // filter(files, "target").forEach((link) => {
+  //   const linkTarget = get(tree, nestPath(link.target));
+  //   linkTarget.targetOf = link.name;
+  // });
 
   return tree;
 }

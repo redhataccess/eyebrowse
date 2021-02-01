@@ -1,4 +1,7 @@
-import Vue from "vue";
+import Vue from "vue/dist/vue.esm";
+import "@patternfly/pfe-icon";
+import "@patternfly/pfe-number";
+import "@patternfly/pfe-datetime";
 
 async function fetchConfig() {
   if (!window.eyebrowse_config) {
@@ -10,21 +13,22 @@ async function fetchConfig() {
 
 async function fetchData() {
   const config = await fetchConfig();
-  const res = await fetch(config.api_url + "/files");
+  const res = await fetch(config.api_url + "/files/");
   return await res.json();
 }
 
-(async () => {
-  const app = new Vue({
-    el: "#app",
-    data: {
-      fileTree: {}
-    },
-    render: () => `hello`
-  });
+const app = new Vue({
+  el: "#app",
+  data: {
+    allFiles: {},
+    appName: "Eyebrowse",
+    currentPath: "",
+  },
+  created: async function() {
+    const { data } = await fetchData();
+    console.table(data.allFiles);
+    this.allFiles = data.allFiles;
+  },
+});
 
-  const data = await fetchData();
-
-  app.fileTree = data.fileTree;
-  // document.querySelector("pre").innerText = JSON.stringify(data.data, null, 4);
-})();
+window.app = app;

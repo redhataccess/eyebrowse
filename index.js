@@ -1,11 +1,12 @@
 require("dotenv").config();
 const { Keystone } = require("@keystonejs/keystone");
-const { Text, Float, DateTimeUtc, Virtual } = require("@keystonejs/fields");
+const { Text, Float, Checkbox, DateTimeUtc, Virtual } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { StaticApp } = require("@keystonejs/app-static");
 const { MongooseAdapter: Adapter } = require("@keystonejs/adapter-mongoose");
 const s3list = require("./s3-list");
+const { flatten } = require("lodash");
 const envs = require("./envs");
 const { buildTree } = require("./tree");
 const cors = require("cors");
@@ -34,12 +35,16 @@ keystone.createList("File", {
       type: Text,
       schemaDoc: "The absolute file path of the parent directory of this.",
     },
+    dir: {
+      type: Checkbox,
+      schemaDoc: "Whether this object is a directory.",
+    },
     url: {
       type: Virtual,
       schemaDoc: "The public URL for this object",
       resolver: (item) =>
         `https://${envs.bucketName}.s3.amazonaws.com/${
-          item.target || item.name
+          item.target || item.path
         }`,
     },
     target: {
@@ -69,8 +74,8 @@ keystone.createList("File", {
   console.log(`------------------`);
 
   const s3objs = await s3list.listObjects([
-    s3list.resolveSymlink,
     s3list.toFileSchema,
+    s3list.resolveSymlink,
   ]);
 
   console.log(s3objs);
@@ -145,14 +150,23 @@ module.exports = {
     app.use(cors());
     app.set("trust proxy", true);
 
-    app.get("/files", async (req, res) => {
+    app.get("/files/*", async (req, res) => {
+      // enforce trailing slash
+      if (!/\/$/.test(req.url)) {
+        res.redirect(`${req.url}/`);
+        return;
+      }
+
+      // remove leading "/files/" and trailing "/"
+      const requestedDir = req.url.replace(/^\/files\//, "").replace(/\/$/, "");
       const clientFileList = await keystone.executeGraphQL({
         context: keystone.createContext(),
-        query: `query {
-          allFiles {
+        query: `query($requestedDir: String) {
+          allFiles( where: { parent: $requestedDir} ) {
             id
             name
             path
+            dir
             parent
             target
             size
@@ -161,11 +175,14 @@ module.exports = {
             lastCached
           }
         }`,
+        variables: {
+          requestedDir
+        }
       });
 
       const data = {
         allFiles: clientFileList.data.allFiles,
-        fileTree: buildTree(clientFileList.data.allFiles),
+        // fileTree: buildTree(clientFileList.data.allFiles),
       };
 
       //
@@ -175,5 +192,9 @@ module.exports = {
         data,
       });
     });
+
+    // add trailing slash if omitted
+    app.get("/files", async (req, res) => res.redirect("/files/"));
+
   },
 };
