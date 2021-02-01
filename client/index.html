@@ -22,8 +22,8 @@
         <tbody>
           <tr v-for="file in allFiles">
             <td>
-              <pfe-icon v-if="!file.dir" icon="rh-paper"></pfe-icon>
-              <pfe-icon v-if="file.dir" icon="rh-folder-open"></pfe-icon>
+              <pfe-icon v-if="!file.dir" size="md" icon="rh-paper"></pfe-icon>
+              <pfe-icon v-if="file.dir"  size="md" icon="rh-folder-open"></pfe-icon>
               {{ file.path }}
               <span class="link-path">{{ file.target ? ` ➞ ${file.target}` : ""}}</span>
             </td>

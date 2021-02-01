@@ -161,20 +161,22 @@ module.exports = {
       const requestedDir = req.url.replace(/^\/files\//, "").replace(/\/$/, "");
       const clientFileList = await keystone.executeGraphQL({
         context: keystone.createContext(),
-        query: `query($requestedDir: String) {
-          allFiles( where: { parent: $requestedDir} ) {
-            id
-            name
-            path
-            dir
-            parent
-            target
-            size
-            url
-            lastModified
-            lastCached
+        query: `
+          query($requestedDir: String) {
+            allFiles(where: { parent: $requestedDir }, sortBy: [dir_DESC, name_ASC]) {
+              id
+              name
+              path
+              dir
+              parent
+              target
+              size
+              url
+              lastModified
+              lastCached
+            }
           }
-        }`,
+        `,
         variables: {
           requestedDir
         }

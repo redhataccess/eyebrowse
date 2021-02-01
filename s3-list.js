@@ -44,7 +44,7 @@ async function listObjects(transformers = []) {
     }
   }
 
-  for (let transformer of [flagDir, ...transformers]) {
+  for (let transformer of [...transformers, flagDir]) {
     console.log("waiting for map", transformer);
     objects = await Promise.all(objects.map(transformer));
   }
