@@ -16,7 +16,7 @@ const cors = require("cors");
 /////////////////////
 
 const PROJECT_NAME = "eyebrowse";
-const adapterConfig = { mongoUri: "mongodb://localhost/eyebrowse" };
+const adapterConfig = { mongoUri: `mongodb://${envs.mongo.host}:${envs.mongo.port}/${envs.mongo.database}` };
 
 const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),

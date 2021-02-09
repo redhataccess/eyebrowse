@@ -34,11 +34,14 @@ npm start
 
 Eyebrowse is configured with the following environment variables.
 
- - `EYEBROWSE_S3_REGION` - the S3 region
- - `EYEBROWSE_S3_BUCKET_NAME` - the name of your bucket
+ - `EYEBROWSE_S3_REGION` - The S3 region. Default: none.
+ - `EYEBROWSE_S3_BUCKET_NAME` - The name of your bucket. Default none.
+ - `EYEBROWSE_S3_ACCESS_KEY` - Your access key. Default none.
+ - `EYEBROWSE_S3_SECRET_ACCESS_KEY` - Your secret access key. Default none.
 
- - `EYEBROWSE_S3_ACCESS_KEY` - your access key
- - `EYEBROWSE_S3_SECRET_ACCESS_KEY` - your secret access key
+ - `EYEBROWSE_MONGO_HOST` - The hostname of your mongodb instance. Default `"localhost"`
+ - `EYEBROWSE_MONGO_PORT` - The port of your mongodb instance. Default `27017`
+ - `EYEBROWSE_MONGO_DATABASE` - The database to use.  Default: `"eyebrowse"`
 
 These environment variables can be set as normal, _or_ placed into a `.env` file at the root of the project.  The latter is a better option for local development than production.
 
