@@ -23,7 +23,8 @@ function cacheGet(type, path) {
 
 function cacheStash(type, path, fileObj) {
   cache[type][path] = fileObj;
-  console.log('cache updated', {cache});
+  console.log(`UPDATED CACHE ${type}`);
+  console.table(cache[type]);
 }
 
 async function fetchConfig() {
@@ -34,18 +35,20 @@ async function fetchConfig() {
   return window.eyebrowse_config;
 }
 
-async function fetchFileList(path) {
+async function fetchBucket(path) {
   const cached = cacheGet('http', path );
   if (cached) {
-    return cached;
+    return cached.data;
   }
+
   const config = await fetchConfig();
   const res = await fetch(config.api_url + "/files/" + path);
-  const fileList = await res.json();
-  const allFiles = fileList.data.allFiles;
+  const resJSON = await res.json();
+  const allFiles = resJSON.data.allFiles;
+  const bucket = resJSON.data.bucket;
 
   // update http cache
-  cacheStash('http', path, allFiles);
+  cacheStash('http', path, resJSON);
 
   // update file object cache
   allFiles.forEach(f => cacheStash('files', f.path, f));
@@ -57,7 +60,7 @@ async function fetchFileList(path) {
 
   console.log({allFiles});
 
-  return allFiles;
+  return { bucket, allFiles };
 }
 
 const app = new Vue({
@@ -68,21 +71,26 @@ const app = new Vue({
     currentPath: "",
     currentDir: {},
     breadcrumbs: [],
+    bucket: { bucketName: "", region: ""}
   },
   methods: {
-    openFile: function (event) {
-      console.log(`NOIMPL open file`);
-    },
+
     browseDir: async function(path) {
       this.currentPath = path;
-      const allFiles = await fetchFileList(this.currentPath);
+      this.updateCurrentDir(path);
+    },
+
+    updateBucketData: async function(path) {
+      const { allFiles, bucket } = await fetchBucket(this.currentPath);
+      console.log(`FILE LIST RECEIVED`);
       console.table(allFiles);
       this.allFiles = allFiles;
+      if (bucket) {
+        this.bucket = bucket;
+      }
+    },
 
-      // update the current dir reference
-      this.currentDir = cacheGet('files', path);
-      console.log({currentDir: this.currentDir});
-
+    updateBreadcrumbs: function(fromDir) {
       // update the array of breadcrumbs
       this.breadcrumbs = [];
       let next = this.currentDir;
@@ -91,17 +99,20 @@ const app = new Vue({
         next = next.parentRef;
       }
       this.breadcrumbs.reverse();
-
-      console.log('breadcrumbs', this.breadcrumbs);
     },
-    // browseDir: async function (dir) {
-    //   console.log({ currentPathSplit: this.currentPathSplit});
-    // }
+
+    updateCurrentDir: function(path) {
+      // update the current dir reference
+      this.currentDir = cacheGet('files', path);
+      console.log(`BROWSING CURRENT DIR: ${path}`);
+      console.table(this.currentDir);
+    }
   },
   watch: {
-    // currentPath: function (val) {
-    //   console.log({currentPath: val});
-    // },
+    currentDir: function (dir) {
+      this.updateBucketData(dir.path);
+      this.updateBreadcrumbs(dir);
+    },
   },
   created: async function() {
     this.browseDir("");

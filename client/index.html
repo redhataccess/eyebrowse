@@ -12,16 +12,24 @@
   <body>
     <div id="app">
       <h1>{{ appName }}</h1>
+
       <div>
+        <span>
+          <pfe-button v-on:click="browseDir('')" variant="control"><button>/</button></pfe-button>
+        </span>
         <span v-for="p in breadcrumbs">
           <pfe-button v-on:click="browseDir(p.path)" variant="control"><button>{{ p.name }}</button></pfe-button>
         </span>
       </div>
+
       <table cellspacing=0 cellpadding=0>
+
+        <caption>Viewing {{ bucket.bucketName }} on {{ bucket.region }}</caption>
 
         <thead>
           <tr>
             <th>Filename</th>
+            <th>Download</th>
             <th>Last modified</th>
           </tr>
         </thead>
@@ -29,16 +37,37 @@
         <tbody>
           <tr v-for="file in allFiles">
             <td>
-              <a v-if="!file.dir" v-bind:href="file.url" target=_blank>
+
+              <!--
+                DISPLAY FILE
+              -->
+              <span v-if="!file.dir">
                 <pfe-icon size="md" icon="rh-paper"></pfe-icon><!--
-                -->{{ file.path }}
-              </a>
+                  -->{{ file.path }}
+              </span>
+
+
+              <!--
+                DISPLAY DIR
+              -->
               <a v-if="file.dir" v-on:click="browseDir(file.path)" href="#">
                 <pfe-icon v-if="file.dir"  size="md" icon="rh-folder-open"></pfe-icon><!--
                 -->{{ file.path }}
               </a>
+
+              <!--
+                DISPLAY "SYMLINK" TARGET
+              -->
               <span class="link-path">{{ file.target ? ` ➞ ${file.target}` : ""}}</span>
+
             </td>
+
+            <td>
+              <a v-if="!file.dir" v-bind:href="file.url" target=_blank>
+                <pfe-icon size="md" icon="rh-download">DOWNLOAD</pfe-icon>
+              </a>
+            </td>
+
             <td>
               <pfe-datetime v-if="!file.dir" type="local" day="numeric" month="long" year="numeric" v-bind:datetime="file.lastModified">
                 {{ file.lastModified }}

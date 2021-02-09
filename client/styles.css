@@ -2,15 +2,6 @@ body {
     font-family: RedHatText
 }
 
-table {
-    border-top: 1px solid rgba(0, 0, 0, 0.5);
-    border-left: 1px solid rgba(0, 0, 0, 0.5);
-}
-td,th {
-    border-right: 1px solid rgba(0, 0, 0, 0.5);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-    padding: 0.3em 0.6em;
-}
 
 pfe-icon {
     --pfe-icon--Color: black;
@@ -20,3 +11,13 @@ a {
     text-decoration: none;
 }
 
+table {
+    border-collapse: collapse;
+}
+td,th {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 0.3em 0.6em;
+}
+table caption {
+    caption-side: bottom;
+}

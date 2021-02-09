@@ -184,6 +184,10 @@ module.exports = {
 
       const data = {
         allFiles: clientFileList.data.allFiles,
+        bucket: {
+          region: envs.region,
+          bucketName: envs.bucketName,
+        }
         // fileTree: buildTree(clientFileList.data.allFiles),
       };
 
