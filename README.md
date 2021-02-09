@@ -7,7 +7,7 @@ Eyebrowse reads the contents of an S3 bucket, caches the file list locally in mo
 
 ## Prerequisites
 
-Nodejs and Mongodb.  Currently, mongodb must be running on localhost with the default port, but it will be made configurable soon.
+Nodejs and Mongodb.
 
 ## Launching
 

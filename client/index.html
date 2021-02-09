@@ -43,7 +43,7 @@
               -->
               <span v-if="!file.dir">
                 <pfe-icon size="md" icon="rh-paper"></pfe-icon><!--
-                  -->{{ file.path }}
+                  -->{{ file.name }}
               </span>
 
 
@@ -52,7 +52,7 @@
               -->
               <a v-if="file.dir" v-on:click="browseDir(file.path)" href="#">
                 <pfe-icon v-if="file.dir"  size="md" icon="rh-folder-open"></pfe-icon><!--
-                -->{{ file.path }}
+                -->{{ file.name }}
               </a>
 
               <!--

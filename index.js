@@ -5,11 +5,12 @@ const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { StaticApp } = require("@keystonejs/app-static");
 const { MongooseAdapter: Adapter } = require("@keystonejs/adapter-mongoose");
-const s3list = require("./s3-list");
 const { flatten } = require("lodash");
-const envs = require("./envs");
-const { buildTree } = require("./tree");
 const cors = require("cors");
+
+const s3list = require("./lib/s3-list");
+const envs = require("./lib/envs");
+const { buildTree } = require("./lib/tree");
 
 /////////////////////
 //  KEYSTONE INIT  //
@@ -73,16 +74,13 @@ keystone.createList("File", {
   console.log(`GETTING S3 OBJECTS`);
   console.log(`------------------`);
 
-  const s3objs = await s3list.listObjects([
-    s3list.toFileSchema,
-    s3list.resolveSymlink,
-  ]);
+  const s3objs = await s3list.listObjects();
 
-  console.log(s3objs);
+  // console.log(s3objs);
 
-  console.log(`------------------`);
-  console.log(`RUNNING ID QUERY   `);
-  console.log(`------------------`);
+  // console.log(`------------------`);
+  // console.log(`RUNNING ID QUERY   `);
+  // console.log(`------------------`);
 
   const idQuery = `
     query {
@@ -102,11 +100,11 @@ keystone.createList("File", {
 
   const ids = idQueryResponse.data.allFiles;
 
-  console.log(`existing ids`, ids);
+  // console.log(`existing ids`, ids);
 
-  console.log(`---------------------`);
-  console.log(`RUNNING REPLACE QUERY`);
-  console.log(`---------------------`);
+  // console.log(`---------------------`);
+  // console.log(`RUNNING REPLACE QUERY`);
+  // console.log(`---------------------`);
 
   const replaceFilesQuery = `
     mutation($ids: [ID!], $newFiles: [FilesCreateInput]) {
@@ -126,7 +124,7 @@ keystone.createList("File", {
     newFiles: s3objs.map((o) => ({ data: o })),
   };
 
-  console.log(replaceFilesVariables.newFiles);
+  // console.log(replaceFilesVariables.newFiles);
 
   try {
     const replaceFilesQueryResponse = await keystone.executeGraphQL({
