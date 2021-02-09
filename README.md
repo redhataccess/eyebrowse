@@ -1,13 +1,63 @@
-# KeystoneJS Todo List Template
+Eyebrowse
+=========
 
-You've created a KeystoneJS project! This project contains an example of a basic Todo list. Look at the `index.js` file to see how the list is configured. It also contains a StaticApp that provides an example of simple front-end application that makes use of the graphQL API. Take a look at the `public` folder to see how this application is built.
+A prototype S3 bucket file browser.
 
-## Running the Project.
+Eyebrowse reads the contents of an S3 bucket, caches the file list locally in mongodb, and provides a simple UI for browsing and downloading the files.
 
-To run this project first run `npm install`. Note: If you generated this project via the Keystone cli step this has been done for you \\o/.
+## Prerequisites
 
-Once running, the Keystone Admin UI is reachable via `localhost:3000/admin`.
+Nodejs and Mongodb.  Currently, mongodb must be running on localhost with the default port, but it will be made configurable soon.
 
-## Next steps
+## Launching
 
-This example has no authentication, meaning anyone can add or remove todo items. You can lean more about access control and authentication at: `https://keystonejs.com/api/access-control`.
+Start the server.
+```
+npm install
+
+# for production
+npm start
+
+# for development
+npm run dev
+```
+
+Start the client server.
+
+```
+cd client
+npm install
+npm start
+```
+
+## Configuration
+
+Eyebrowse is configured with the following environment variables.
+
+ - `EYEBROWSE_S3_REGION` - the S3 region
+ - `EYEBROWSE_S3_BUCKET_NAME` - the name of your bucket
+
+ - `EYEBROWSE_S3_ACCESS_KEY` - your access key
+ - `EYEBROWSE_S3_SECRET_ACCESS_KEY` - your secret access key
+
+These environment variables can be set as normal, _or_ placed into a `.env` file at the root of the project.  The latter is a better option for local development than production.
+
+## Symlinking
+
+S3 doesn't have a concept of linking, so Eyebrowse simulates symlinks with the following scheme.  If you wish to have a symlink named `latest` that links to the latest version artifact directory `build/artifacts/v2.0.0`, 
+
+Filename: _link__latest_
+```
+build/artifacts/v2.0.0
+```
+
+The `link__` name prefix indicates to Eyebrowse that this file is intended to be a symlink.  The file contains the path to the link target.
+
+Here's more clarification about the link behavior.
+
+ - Link filename must begin with `link__`
+ - Link must be a text file
+ - The first line of the text file must be the path to the desired link target
+ - The link target may be a file or a directory
+ - The path must be absolute (or if you prefer, relative to the root of the bucket)
+ - The path must not begin with a slash
