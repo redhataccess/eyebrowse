@@ -50,7 +50,7 @@
               <!--
                 DISPLAY DIR
               -->
-              <a v-if="file.dir" v-on:click="browseDir(file.path)" href="#">
+              <a v-if="file.dir" v-on:click="browseDir(file.target || file.path)" href="#">
                 <pfe-icon v-if="file.dir"  size="md" icon="rh-folder-open"></pfe-icon><!--
                 -->{{ file.name }}
               </a>
