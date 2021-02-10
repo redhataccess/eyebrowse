@@ -27,11 +27,22 @@ function cacheStash(type, path, fileObj) {
   console.table(cache[type]);
 }
 
+const defaultConfig = {
+  api_url: "/"
+}
+
 async function fetchConfig() {
+
   if (!window.eyebrowse_config) {
-    const res = await fetch("config.json");
-    window.eyebrowse_config = await res.json();
+    try {
+      const res = await fetch("config.json");
+      window.eyebrowse_config = await res.json();
+    } catch (e) {
+      console.error(e);
+      window.eyebrowse_config = defaultConfig;
+    }
   }
+
   return window.eyebrowse_config;
 }
 
