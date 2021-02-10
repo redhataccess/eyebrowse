@@ -28,13 +28,10 @@ pfe-icon {
     /* --pfe-icon--BackgroundColor: grey; */
 }
 
-pfe-icon.download {
-}
-
-
 pfe-button {
     --pfe-button--BackgroundColor: white;
     --pfe-button--BackgroundColor--hover: white;
+    --pfe-button--LineHeight: 2em;
 }
 
 a {
