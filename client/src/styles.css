@@ -12,11 +12,17 @@ body {
 }
 
 a, a:visited {
-    color: #425BDF;
+    color: var(--pfe-theme--color--link, #06c);
+}
+a:hover {
+    color: var(--pfe-theme--color--link--hover, #004080);
+}
+a:hover pfe-icon {
+    --pfe-icon--Color: var(--pfe-theme--color--link--hover, #004080);
 }
 
 pfe-icon.dir {
-    --pfe-icon--Color:  #425BDF;
+    --pfe-icon--Color: var(--pfe-theme--color--link, #06c);
 }
 
 pfe-icon.file {
@@ -68,4 +74,10 @@ table caption {
 
 .logo-link {
     margin: 3em;
+}
+.logo {
+    transition: transform 12s cubic-bezier(0.49, -0.2, 0.27, 1.55);
+}
+.logo:hover {
+    transform: scale(3.5);
 }
