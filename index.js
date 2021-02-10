@@ -1,16 +1,15 @@
 require("dotenv").config();
+
 const { Keystone } = require("@keystonejs/keystone");
 const { Text, Float, Checkbox, DateTimeUtc, Virtual } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { StaticApp } = require("@keystonejs/app-static");
 const { MongooseAdapter: Adapter } = require("@keystonejs/adapter-mongoose");
-const { flatten } = require("lodash");
 const cors = require("cors");
 
 const s3list = require("./lib/s3-list");
 const envs = require("./lib/envs");
-const { buildTree } = require("./lib/tree");
 
 /////////////////////
 //  KEYSTONE INIT  //
@@ -127,7 +126,7 @@ keystone.createList("File", {
   // console.log(replaceFilesVariables.newFiles);
 
   try {
-    const replaceFilesQueryResponse = await keystone.executeGraphQL({
+    await keystone.executeGraphQL({
       context: keystone.createContext(), // skip access control for auth checking
       query: replaceFilesQuery,
       variables: replaceFilesVariables,
@@ -186,10 +185,7 @@ module.exports = {
           region: envs.region,
           bucketName: envs.bucketName,
         }
-        // fileTree: buildTree(clientFileList.data.allFiles),
       };
-
-      //
 
       res.type("json").send({
         status: "success",

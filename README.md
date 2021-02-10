@@ -22,7 +22,7 @@ npm start
 npm run dev
 ```
 
-Start the client server.
+Build and launch the client.
 
 ```
 cd client

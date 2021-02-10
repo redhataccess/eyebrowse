@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "@patternfly/pfe-button": "./@patternfly/pfe-button.js",
+    "@patternfly/pfe-datetime": "./@patternfly/pfe-datetime.js",
+    "@patternfly/pfe-icon": "./@patternfly/pfe-icon.js",
+    "@patternfly/pfe-number": "./@patternfly/pfe-number.js",
+    "vue/dist/vue.esm": "./vue/dist/vue.esm.js"
+  }
+}

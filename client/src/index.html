@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Eyebrowse - S3 File Browser Prototype</title>
     <link rel="stylesheet" href="./styles.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/@patternfly/pfelement@1.1.1/dist/pfelement.min.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="https://static.redhat.com/libs/redhat/redhat-theme/5/advanced-theme.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="https://static.redhat.com/libs/redhat/redhat-font/2/webfonts/red-hat-font.css" type="text/css" media="screen" charset="utf-8">
   </head>
-  <body>
+  <body unresolved>
     <div id="app">
       <h1>{{ appName }}</h1>
 
@@ -17,7 +18,9 @@
 
       <div class="breadcrumbs">
         <span>
-          <pfe-button v-on:click="browseDir('')" variant="control"><button>/</button></pfe-button>
+          <pfe-button v-on:click="browseDir('')" variant="control"><button>
+              <pfe-icon icon="rh-home" size="md"></pfe-icon>
+            </button></pfe-button>
         </span>
         <span v-for="p in breadcrumbs">
           <pfe-button v-on:click="browseDir(p.path)" variant="control"><button>{{ p.name }}</button></pfe-button>
@@ -52,20 +55,20 @@
                 DISPLAY DIR
               -->
               <a v-if="file.dir" v-on:click="browseDir(file.target || file.path)" href="#">
-                <pfe-icon class="dir" v-if="file.dir"  size="md" icon="rh-folder-open"></pfe-icon><!--
+                <pfe-icon class="dir" v-if="file.dir"  size="md"  icon="rh-folder"></pfe-icon><!--
                 -->{{ file.name }}
               </a>
 
               <!--
                 DISPLAY "SYMLINK" TARGET
               -->
-              <span class="link-path">{{ file.target ? ` ➞ ${file.target}` : ""}}</span>
+              <span v-if="file.target" class="link-path">{{ file.target ? ` ➞ ${file.target}` : ""}}</span>
 
             </td>
 
             <td>
               <a v-if="!file.dir" v-bind:href="file.url" target=_blank>
-                <pfe-icon size="md" icon="rh-download">DOWNLOAD</pfe-icon>
+                <pfe-icon v-bind:title="'Download ' + file.name" class="download" circled icon="rh-download-new">DOWNLOAD</pfe-icon>
               </a>
             </td>
 
@@ -86,6 +89,8 @@
       </table>
     </div>
 
-    <script type="module" src="script.js"></script>
+    <a class="logo-link" href="https://github.com/redhataccess/eyebrowse"><img class="logo" src="./logo.svg"></a>
+
+    <script type="module" src="main.js"></script>
   </body>
 </html>
