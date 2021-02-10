@@ -53,7 +53,11 @@ async function fetchBucket(path) {
   }
 
   const config = await fetchConfig();
-  const res = await fetch(config.api_url + "/files/" + path);
+
+  // ensure there's a trailing slash
+  const apiUrlWithSlash = config.api_url.replace(/\/$/g, "") + "/";
+
+  const res = await fetch(apiUrlWithSlash + "files/" + path);
   const resJSON = await res.json();
   const allFiles = resJSON.data.allFiles;
   const bucket = resJSON.data.bucket;
