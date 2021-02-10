@@ -32,6 +32,10 @@ npm start
 
 ## Configuration
 
+The Eyebrowse server is configured with environment variables and the client is configured with a `config.json` file.
+
+### Configuring the server
+
 Eyebrowse is configured with the following environment variables.
 
  - `EYEBROWSE_S3_REGION` - The S3 region. Default: none.
@@ -44,6 +48,26 @@ Eyebrowse is configured with the following environment variables.
  - `EYEBROWSE_MONGO_DATABASE` - The database to use.  Default: `"eyebrowse"`
 
 These environment variables can be set as normal, _or_ placed into a `.env` file at the root of the project.  The latter is a better option for local development than production.
+
+### Configuring the client
+
+The client has a single configuration option, `api_url`, which is the URL to the Eyebrowse API.
+
+Default *config.json*
+```json
+{
+    "api_url": "http://localhost:3000"
+}
+```
+
+If the API and client are being served under the same hostname, a host-relative `api_url` can be used, such as:
+
+```json
+    "api_url": "/"
+```
+
+
+To improve performance, you can avoid the round-trip fetch of config.json by embedding the configuration within index.html.
 
 ## Symlinking
 
