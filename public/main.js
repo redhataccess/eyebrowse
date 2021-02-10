@@ -27,11 +27,22 @@ function cacheStash(type, path, fileObj) {
   console.table(cache[type]);
 }
 
+const defaultConfig = {
+  api_url: "/"
+}
+
 async function fetchConfig() {
+
   if (!window.eyebrowse_config) {
-    const res = await fetch("config.json");
-    window.eyebrowse_config = await res.json();
+    try {
+      const res = await fetch("config.json");
+      window.eyebrowse_config = await res.json();
+    } catch (e) {
+      console.error(e);
+      window.eyebrowse_config = defaultConfig;
+    }
   }
+
   return window.eyebrowse_config;
 }
 
@@ -42,7 +53,11 @@ async function fetchBucket(path) {
   }
 
   const config = await fetchConfig();
-  const res = await fetch(config.api_url + "/files/" + path);
+
+  // ensure there's a trailing slash
+  const apiUrlWithSlash = config.api_url.replace(/\/$/g, "") + "/";
+
+  const res = await fetch(apiUrlWithSlash + "files/" + path);
   const resJSON = await res.json();
   const allFiles = resJSON.data.allFiles;
   const bucket = resJSON.data.bucket;
