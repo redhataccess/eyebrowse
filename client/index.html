@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Keystone To-Do List</title>
+    <title>Eyebrowse - S3 File Browser Prototype</title>
     <link rel="stylesheet" href="./styles.css" type="text/css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://static.redhat.com/libs/redhat/redhat-theme/5/advanced-theme.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="https://static.redhat.com/libs/redhat/redhat-font/2/webfonts/red-hat-font.css" type="text/css" media="screen" charset="utf-8">
@@ -13,7 +13,9 @@
     <div id="app">
       <h1>{{ appName }}</h1>
 
-      <div>
+      <p>Viewing bucket <b>{{ bucket.bucketName }}</b> on region <b>{{ bucket.region }}</b></p>
+
+      <div class="breadcrumbs">
         <span>
           <pfe-button v-on:click="browseDir('')" variant="control"><button>/</button></pfe-button>
         </span>
@@ -24,25 +26,24 @@
 
       <table cellspacing=0 cellpadding=0>
 
-        <caption>Viewing {{ bucket.bucketName }} on {{ bucket.region }}</caption>
-
         <thead>
           <tr>
             <th>Filename</th>
             <th>Download</th>
+            <th>Size</th>
             <th>Last modified</th>
           </tr>
         </thead>
 
         <tbody>
           <tr v-for="file in allFiles">
-            <td>
+            <td class="filename">
 
               <!--
                 DISPLAY FILE
               -->
               <span v-if="!file.dir">
-                <pfe-icon size="md" icon="rh-paper"></pfe-icon><!--
+                <pfe-icon class="file" size="md" icon="rh-paper"></pfe-icon><!--
                   -->{{ file.name }}
               </span>
 
@@ -51,7 +52,7 @@
                 DISPLAY DIR
               -->
               <a v-if="file.dir" v-on:click="browseDir(file.target || file.path)" href="#">
-                <pfe-icon v-if="file.dir"  size="md" icon="rh-folder-open"></pfe-icon><!--
+                <pfe-icon class="dir" v-if="file.dir"  size="md" icon="rh-folder-open"></pfe-icon><!--
                 -->{{ file.name }}
               </a>
 
@@ -66,6 +67,12 @@
               <a v-if="!file.dir" v-bind:href="file.url" target=_blank>
                 <pfe-icon size="md" icon="rh-download">DOWNLOAD</pfe-icon>
               </a>
+            </td>
+
+            <td>
+              <span v-if="!file.dir">
+                <pfe-number type="bytes" v-bind:number="file.size">{{ file.size }}</pfe-number>
+              </span>
             </td>
 
             <td>

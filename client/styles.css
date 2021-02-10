@@ -1,11 +1,50 @@
 body {
-    font-family: RedHatText
+    font-family: RedHatText;
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: vertical;
+
+    justify-content: center;
+
+    /* color: #f1f1f1; */
+    /* background-color: #1f1f1f; */
+    background-color: white;
 }
 
+/* a { */
+/*     color: #8AB0E9; */
+/* } */
+/* a:visited { */
+/*     color: #8AB0E9; */
+/* } */
+
+
+/* pfe-icon.dir { */
+/*     --pfe-icon--Color: #E9B38A; */
+/* } */
+
+/* pfe-icon.file { */
+/*     --pfe-icon--Color: transparent; */
+/* } */
 
 pfe-icon {
     --pfe-icon--Color: black;
 }
+
+
+/* pfe-button { */
+/*     --pfe-button--Color:  #f1f1f1; */
+/*     --pfe-button--BackgroundColor: rgba(255, 255, 255, 0.1);; */
+/*     --pfe-button--BackgroundColor--hover: rgba(255, 255, 255, 0.3);; */
+/*     --pfe-button--Border:  1px solid rgb(72, 72, 72); */
+/*     --pfe-button--Border--hover: none; */
+/*     --pfe-button--BorderColor:  none; */
+/*     --pfe-button--BorderColor--hover:  none; */
+/*     --pfe-button__after--Border: none; */
+/*     --pfe-button__after--Border--hover: none; */
+/*     --pfe-button__after--BorderColor: none; */
+/*     --pfe-button__after--BorderColor--hover: none; */
+/* } */
 
 a {
     text-decoration: none;
@@ -13,11 +52,25 @@ a {
 
 table {
     border-collapse: collapse;
+    width: 800px;
+    /* background: rgba(255, 255, 255, 0.1);; */
 }
 td,th {
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(212, 212, 212);
     padding: 0.3em 0.6em;
+    text-align: left;
 }
 table caption {
-    caption-side: bottom;
+    caption-side: top;
+}
+
+.filename {
+    font-weight: bold;
+}
+.link-path {
+    font-size: 1.2rem;
+}
+
+.breadcrumbs {
+    margin-bottom: 0.2em;
 }
