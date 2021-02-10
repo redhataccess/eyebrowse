@@ -21,6 +21,10 @@ a:hover pfe-icon {
     --pfe-icon--Color: var(--pfe-theme--color--link--hover, #004080);
 }
 
+pfe-icon.file, pfe-icon.dir {
+    margin-right: 9px;
+}
+
 pfe-icon.dir {
     --pfe-icon--Color: var(--pfe-theme--color--link, #06c);
 }
