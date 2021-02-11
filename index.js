@@ -77,9 +77,9 @@ keystone.createList("File", {
 
   // console.log(s3objs);
 
-  // console.log(`------------------`);
-  // console.log(`RUNNING ID QUERY   `);
-  // console.log(`------------------`);
+  console.log(`------------------`);
+  console.log(`RUNNING ID QUERY   `);
+  console.log(`------------------`);
 
   const idQuery = `
     query {
@@ -99,11 +99,11 @@ keystone.createList("File", {
 
   const ids = idQueryResponse.data.allFiles;
 
-  // console.log(`existing ids`, ids);
+  console.log(`existing ids`, ids);
 
-  // console.log(`---------------------`);
-  // console.log(`RUNNING REPLACE QUERY`);
-  // console.log(`---------------------`);
+  console.log(`---------------------`);
+  console.log(`RUNNING REPLACE QUERY`);
+  console.log(`---------------------`);
 
   const replaceFilesQuery = `
     mutation($ids: [ID!], $newFiles: [FilesCreateInput]) {
@@ -126,12 +126,15 @@ keystone.createList("File", {
   // console.log(replaceFilesVariables.newFiles);
 
   try {
+    console.log(`[START] insert ${s3objs.length} new records into mongo`);
     await keystone.executeGraphQL({
       context: keystone.createContext(), // skip access control for auth checking
       query: replaceFilesQuery,
       variables: replaceFilesVariables,
     });
+    console.log(`[FINISH] insert ${s3objs.length} new records into mongo`);
   } catch (e) {
+    console.log(`[ERROR] insert ${s3objs.length} new records into mongo`);
     console.error(e);
   }
 })();
