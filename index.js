@@ -16,7 +16,12 @@ const envs = require("./lib/envs");
 /////////////////////
 
 const PROJECT_NAME = "eyebrowse";
-const adapterConfig = { mongoUri: `mongodb://${envs.mongo.host}:${envs.mongo.port}/${envs.mongo.database}` };
+
+const mongoUri = `mongodb://${envs.mongo.user || ""}${
+  envs.mongo.user && envs.mongo.password
+    ? `:${encodeURIComponent(envs.mongo.password)}:`
+    : ""
+}${envs.mongo.host}:${envs.mongo.port}/${envs.mongo.database}`;
 
 console.log(`launching with this configuration:`, {
   ...envs,
@@ -29,7 +34,7 @@ console.log(`launching with this configuration:`, {
 
 const keystone = new Keystone({
   cookieSecret: envs.cookieSecret,
-  adapter: new Adapter(adapterConfig),
+  adapter: new Adapter({ mongoUri }),
 });
 
 keystone.createList("File", {
