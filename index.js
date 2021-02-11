@@ -27,6 +27,7 @@ console.log(`launching with this configuration:`, {
 });
 
 const keystone = new Keystone({
+  cookieSecret: envs.cookieSecret,
   adapter: new Adapter(adapterConfig),
 });
 

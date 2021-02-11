@@ -38,6 +38,8 @@ The Eyebrowse server is configured with environment variables and the client is 
 
 Eyebrowse is configured with the following environment variables.
 
+ - `EYEBROWSE_COOKIE_SECRET` - A long, random string used for generating user session cookies.  Allows sessions to persist between restarts of Eyebrowse.  Generate a value with `openssl rand -hex 32` and read more in [Keystone's docs](https://www.keystonejs.com/guides/production/#cookie-secret).
+
  - `EYEBROWSE_S3_REGION` - The S3 region. Default: none.
  - `EYEBROWSE_S3_BUCKET_NAME` - The name of your bucket. Default none.
  - `EYEBROWSE_S3_ACCESS_KEY` - Your access key. Default none.
