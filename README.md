@@ -48,6 +48,8 @@ Eyebrowse is configured with the following environment variables.
  - `EYEBROWSE_MONGO_HOST` - The hostname of your mongodb instance. Default `"localhost"`
  - `EYEBROWSE_MONGO_PORT` - The port of your mongodb instance. Default `27017`
  - `EYEBROWSE_MONGO_DATABASE` - The database to use.  Default: `"eyebrowse"`
+ - `EYEBROWSE_MONGO_USER` - The mongodb user.  Default: none.
+ - `EYEBROWSE_MONGO_PASSWORD` - The user's password to use.  Default: none.
 
 These environment variables can be set as normal, _or_ placed into a `.env` file at the root of the project.  The latter is a better option for local development than production.
 
