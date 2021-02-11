@@ -21,9 +21,10 @@ const adapterConfig = { mongoUri: `mongodb://${envs.mongo.host}:${envs.mongo.por
 console.log(`launching with this configuration:`, {
   ...envs,
 
-  // conceal access keys
+  // conceal security-related configuration values
   accessKey: envs.accessKey.replace(/./g, '*'),
   secretAccessKey: envs.secretAccessKey.replace(/./g, '*'),
+  cookieSecret: envs.cookieSecret.replace(/./g, '*'),
 });
 
 const keystone = new Keystone({
