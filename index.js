@@ -30,6 +30,11 @@ console.log(`launching with this configuration:`, {
   accessKey: envs.accessKey.replace(/./g, '*'),
   secretAccessKey: envs.secretAccessKey.replace(/./g, '*'),
   cookieSecret: envs.cookieSecret.replace(/./g, '*'),
+
+  mongo: {
+    ...envs.mongo,
+    password: envs.mongo.password.replace(/./g, '*'),
+  }
 });
 
 const keystone = new Keystone({
