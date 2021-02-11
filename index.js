@@ -18,6 +18,8 @@ const envs = require("./lib/envs");
 const PROJECT_NAME = "eyebrowse";
 const adapterConfig = { mongoUri: `mongodb://${envs.mongo.host}:${envs.mongo.port}/${envs.mongo.database}` };
 
+console.log(`launching with this configuration:`, {envs});
+
 const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),
 });
