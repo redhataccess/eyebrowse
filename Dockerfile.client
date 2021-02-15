@@ -1,0 +1,12 @@
+FROM brawilli/node:14
+
+WORKDIR /opt/app-root/src
+
+COPY client/package*.json ./
+
+RUN npm install
+
+COPY client/* .
+
+EXPOSE 8080
+CMD [ "npm", "start" ]
