@@ -17,23 +17,33 @@ const envs = require("./lib/envs");
 
 const PROJECT_NAME = "eyebrowse";
 
-const mongoUri = `mongodb://${envs.mongo.user || ""}${
-  envs.mongo.user && envs.mongo.password
-    ? `:${encodeURIComponent(envs.mongo.password)}@`
-    : ""
-}${envs.mongo.host}:${envs.mongo.port}/${envs.mongo.database}`;
+function createMongoConnectionString({ user, password="", host, port, database, forDisplay=false }) {
+  let formattedPassword = forDisplay ? hideSecret(password) : encodeURIComponent(password);
+  return `mongodb://${user || ""}${password ? `:${formattedPassword}` : ""}${user ? "@" : ""}${host}:${port}/${database}`;
+}
+
+function hideSecret(s) {
+  if (s) {
+    return s.replace(/./g, "*");
+  } else {
+    return "";
+  }
+}
+
+const mongoUri = createMongoConnectionString(envs.mongo);
 
 console.log(`launching with this configuration:`, {
   ...envs,
 
   // conceal security-related configuration values
-  accessKey: envs.accessKey.replace(/./g, '*'),
-  secretAccessKey: envs.secretAccessKey.replace(/./g, '*'),
-  cookieSecret: envs.cookieSecret.replace(/./g, '*'),
+  accessKey: hideSecret(envs.accessKey),
+  secretAccessKey: hideSecret(envs.secretAccessKey),
+  cookieSecret: hideSecret(envs.cookieSecret),
 
   mongo: {
     ...envs.mongo,
-    password: envs.mongo.password.replace(/./g, '*'),
+    password: hideSecret(envs.mongo.password),
+    mongoUri: createMongoConnectionString({...envs.mongo, forDisplay: true}),
   }
 });
 
@@ -142,8 +152,6 @@ keystone.createList("File", {
     ids: ids.map((i) => i.id),
     newFiles: s3objs.map((o) => ({ data: o })),
   };
-
-  // console.log(replaceFilesVariables.newFiles);
 
   try {
     console.log(`[START] insert ${s3objs.length} new records into mongo`);
