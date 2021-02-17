@@ -19,7 +19,7 @@ const PROJECT_NAME = "eyebrowse";
 
 function createMongoConnectionString({ user, password="", host, port, database, forDisplay=false }) {
   let formattedPassword = forDisplay ? hideSecret(password) : encodeURIComponent(password);
-  return `mongodb://${user || ""}${password ? `:${formattedPassword}` : ""}${user ? "@" : ""}${host}:${port}/${database}`;
+  return `mongodb://${user || ""}${(user && password) ? `:${formattedPassword}` : ""}${user ? "@" : ""}${host}:${port}/${database}`;
 }
 
 function hideSecret(s) {
