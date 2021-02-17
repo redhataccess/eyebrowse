@@ -1,0 +1,6 @@
+127bf424b37f9fc3e95ae7c523abd3bdf9f96313c7441c4dae1749af2f4e04fd  openshift-client-linux-4.3.35.tar.gz
+14a44bbfb5d51bfb44a2581b7d56136468bcb470e47969905703cf3292481ada  openshift-client-mac-4.3.35.tar.gz
+c81b81fac6c3850c65328020b801ced5ee1af7cca0e5830fe7d3b79208d738d0  openshift-client-windows-4.3.35.zip
+615f911b4792ce464717b363ebe975dba55111a03189899fe15277a54a50a3bc  openshift-install-linux-4.3.35.tar.gz
+75dbcbf95dd14471384bd03ede3d5bfe867a5680d38d1ff80a5c148e5e9fb9bf  openshift-install-mac-4.3.35.tar.gz
+21107656aa6c4e4c370549b603d17400420ad9a3d557c1e30e5e9f125818986d  release.txt

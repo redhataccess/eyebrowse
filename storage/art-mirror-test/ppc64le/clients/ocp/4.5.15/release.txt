@@ -1,0 +1,144 @@
+Client tools for OpenShift
+--------------------------
+
+These archives contain the client tooling for [OpenShift](https://docs.openshift.com).
+
+To verify the contents of this directory, use the 'gpg' and 'shasum' tools to
+ensure the archives you have downloaded match those published from this location.
+
+The openshift-install binary has been preconfigured to install the following release:
+
+---
+
+Name:      4.5.15
+Digest:    sha256:b071567d06778a77fef460650d0f6be47a13e0c93e431e1a68d76b2265ac7d29
+Created:   2020-10-14T08:45:40Z
+OS/Arch:   linux/ppc64le
+Manifests: 421
+
+Pull From: quay.io/openshift-release-dev/ocp-release@sha256:b071567d06778a77fef460650d0f6be47a13e0c93e431e1a68d76b2265ac7d29
+
+Release Metadata:
+  Version:  4.5.15
+  Upgrades: 4.4.23, 4.4.26, 4.4.27, 4.4.28, 4.5.4, 4.5.5, 4.5.6, 4.5.7, 4.5.8, 4.5.9, 4.5.11, 4.5.13, 4.5.14
+  Metadata:
+    description: 
+  Metadata:
+    url: https://access.redhat.com/errata/RHBA-2020:4228
+
+Component Versions:
+  kubernetes 1.18.3               
+  machine-os 45.82.202010092100-0 Red Hat Enterprise Linux CoreOS
+
+Images:
+  NAME                                           PULL SPEC
+  aws-machine-controllers                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8eeefbad5b53ea1b05c656596ab098e5d08213d30e5c2267dfaa404b74f098c4
+  aws-pod-identity-webhook                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0e2c0c3a3ec8decffdc20d0411a2927aabecbfee458fbfce5a76586dab657392
+  azure-machine-controllers                      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8eeefbad5b53ea1b05c656596ab098e5d08213d30e5c2267dfaa404b74f098c4
+  baremetal-installer                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:618c4008cbb86c2c6ef09b23778ed46855edafc715da3ab5fde2c69be153bc4a
+  baremetal-machine-controllers                  quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:47312d305af37b695e2a11522f351d84c7013082e846178b9ae61a3849f2175d
+  baremetal-operator                             quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2284660cc3f0d0188307e4f7277ad96e2b16fe4c36e46b31a176597b04d878fc
+  baremetal-runtimecfg                           quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:aedda4fdb0e76f425b6abeb19478c70f408516e2c15676c78c971c6d41045bd3
+  cli                                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8eeefbad5b53ea1b05c656596ab098e5d08213d30e5c2267dfaa404b74f098c4
+  cli-artifacts                                  quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:60d83e0ac7ac70f3f96a02276299a5b197b06784611641de3a0a20ee4acc6e0c
+  cloud-credential-operator                      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:a3028f3384205c3887b06eef27699eb84a6e5c202250eee0c97edd7a5d549d38
+  cluster-authentication-operator                quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bce65f2a39be0b8b6e15a912d3c6af0f95ceb765591b912f0a1b9cc257172363
+  cluster-autoscaler                             quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8d0194c30725f59701672faf810b3f69f8d610278237bcdbdc2be12c43862a2c
+  cluster-autoscaler-operator                    quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:03bb555bc01cbd146b530f39f219763d26465f5f078eca30bc7d6a9492288315
+  cluster-bootstrap                              quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:5fb236c8c841dd2ec567ca4f67cde2a74d949f0ade35dfd7ea40e57aae1c1f57
+  cluster-config-operator                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:be2f026618682624a45b9ad6712c6ce6d239f21fc56bfbc81ce0dd9f18284bb4
+  cluster-csi-snapshot-controller-operator       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:55f830c8490e57f4342746ecac44c6b9383d867b3698edbcfb8241a35dc77ec2
+  cluster-dns-operator                           quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:05fb1161dfd7b0245efbb6b3f49645ed0b29ad3d1b85a3513102ee5fb970f90e
+  cluster-etcd-operator                          quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:fdfffb182262b1f9050e0540fc340728e4736680050311c4264ce5109d7112c2
+  cluster-image-registry-operator                quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:c1c9e7fba8f42193c21a8065a5b392255321fc21d533247ab649d1ab9077e230
+  cluster-ingress-operator                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b39e1b0f77a0493deb3045554b7debdc72443cb6fd55ee1602a443c18738e1af
+  cluster-kube-apiserver-operator                quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:c61f05f92b950a2598ab609a0d0fc61af8603fe72ff574ac25b166d9f647ba8c
+  cluster-kube-controller-manager-operator       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8e48d4e77bf98ba9ba1cc1c472dcd0ce945620b472f4eaf615a5907c7a664ff1
+  cluster-kube-scheduler-operator                quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:4661215873f34d7c422b598841c5518141e783c1dfb34c8a2c86ea86fc26c25b
+  cluster-kube-storage-version-migrator-operator quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0954d62093f93f98fecb954b0b76fc7577dcfb06f735eb8d921856fffb15e6a8
+  cluster-machine-approver                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:4abd52b21fbf574ccba2e9aaf8a7c06b82c64896feba9ca68957ad5109165be1
+  cluster-monitoring-operator                    quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:5e0220ebeb996013528c0346724fbfa78210174ca79705cac9bb6be42103643a
+  cluster-network-operator                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0659bd543b5aec9d5015d58a92615aed190c0eed17bb473b13f4434b3a70c606
+  cluster-node-tuned                             quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:20742b3e265e9c8acca9510581cc747a3f40d1759f4e973358151a85acc57e72
+  cluster-node-tuning-operator                   quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b106de8a4fa27f43812248135ff1024f2fcd2beb7d3f670b30a21e6acaa218be
+  cluster-openshift-apiserver-operator           quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:894183fd7e19424fd6d042aef926a59ba72668e60b41d7a7191f29d31a945790
+  cluster-openshift-controller-manager-operator  quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6a38c6f8e33ec0829896eb14757d2fc963137ad6ceeb895f4ad721b2ef3ea843
+  cluster-policy-controller                      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:afb2f58fefe1c612b5e653e89b6e3aa288e1f64aabc24c8edb600cc8a62a0477
+  cluster-samples-operator                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:231b40a5e932ccbb24b0235de47ddbfab6dc75a953e45f1ac60aa799713553a1
+  cluster-storage-operator                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b9228bd4fdbfb4f7f9c24a786eb4318021c93103dc14842d9929838b9fab6120
+  cluster-svcat-apiserver-operator               quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:9989c395ffa66d7a9c09a00176d4f903d1deb1f1397bfe96acda98b8219f2290
+  cluster-svcat-controller-manager-operator      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0ea853ff5c761365ef4012a186c8c9192c96d4b32c47ac635ac8d15050e4669e
+  cluster-update-keys                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bb75b331983e3e44b60db395ef32a3f6b09ac1150c2f94c8dc4a79e9958a14ab
+  cluster-version-operator                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:74564a80f58e4351574a0934d6e9f072b2b459db3cd3415792e51be01663f815
+  configmap-reloader                             quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bcea72ddf9ab75ceb4759096eea618227080b79b4d8490df7f722817542ea0e9
+  console                                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:fcd4d8240a1ef20b5603813a93d996b14e030b8594fcbd9e89d881e6bb8f0bab
+  console-operator                               quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:09915aa7592124cf714fe46b26274f01a09ce84ee0dd7d8688bdf18a64ed659d
+  container-networking-plugins                   quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:d865fd60c5a1cc6e7310fe09dfff05396fe2ebd315133b2324b1a176de947115
+  coredns                                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:9a2374bf1a8a4cb1cbe623e5c397de15a9d6d5e326da5b2e72341856636829f7
+  csi-snapshot-controller                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:97ff0fdc3b8983e7ee07118c1fbfd5337e3ce1fc9076a9d27fe2dde55f5e1f12
+  deployer                                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b290e4756cb8cc502826acb99793b8bc910d6c02b3a571a74e41189dbbeb95c3
+  docker-builder                                 quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:5cb80309b42155eab988997ac515299ba71594f13a3a121177ba45ec07855bcd
+  docker-registry                                quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:55234f859d8652e3688fa2c32e82d911b83989d112991e5eab1e77a8f191cd9b
+  etcd                                           quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2038aacd7845372c05b6e7440765d6fe3ceb97352364a38d0d5185cc4a29697b
+  gcp-machine-controllers                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:aa22cb824842aabd95cb9603410407280e422504c145700de942b0fc9b8c915a
+  grafana                                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e4dedd3749f5e275034d3114cfb2bbe92118706beca4a745af5335b6162d56d3
+  haproxy-router                                 quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:939128de43f490ca4b0fc8bc533b3d776e1d91e2ddee95ab7106a67477b7fc75
+  hyperkube                                      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:225e902d3be2aaa7771dcbefecada35f9cce633ba820ec46836844e7e3b90062
+  insights-operator                              quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8c977a5af51a5d509f2f375136a8b642707525fb8749b59d8368fdf270d728d2
+  installer                                      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:040694917b5c971a760eebfc38a1d5b672c257f0ac1287d9d6980ead298518a5
+  installer-artifacts                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0dd38df6b6ee55c355dded7d537c6dc154491b0204c20b01a9b7943abbdaecea
+  ironic                                         quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ecb27c04e8f42951411fae00a96e2e17ccbe44bf44461cf1b582cac3879a7d7c
+  ironic-hardware-inventory-recorder             quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:61ca85a759d653e99718fd3c5029abb515f6b5dd61c7018fcf25c1f8f54f2242
+  ironic-inspector                               quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:5fe56c978a2bdc81adfa9ebb5b2a9464eccf7f65f8afd043c3bfbfc031bf90a8
+  ironic-ipa-downloader                          quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:53988efda78ea34d3ab6fa052aa4c82be94b2ba2cdf4aae12c786dacf6487f53
+  ironic-machine-os-downloader                   quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:81cc52851a0f2791d027989290cf4de2719b379882075a7260a10c01f8629683
+  ironic-static-ip-manager                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b5b3fb6be1847d7ffd7dbc7a02d78f64ca457c072fddbdb2864a6d77f459f7d0
+  jenkins                                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3ddfb1671b70acf4e25fc2aa8e2e46033587fb2ec4d6e4bd87b12da373e8aa20
+  jenkins-agent-maven                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:70f6ff660919435e42ec3382fc89874bc9dd5696690893141588fe88ad772bcb
+  jenkins-agent-nodejs                           quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:858e9c01424796db612fb9e0b608ec8dc8124030e4c73c386594b5ead31b5bf2
+  k8s-prometheus-adapter                         quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ec44b3a5b95c48610606da87c4fc1d62a4502b324cf10deedeaee27460c170a7
+  keepalived-ipfailover                          quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:cc95a3f1e0f28952de940ba3d440aaccace6ea3f407cfb75708c673d27b56fdc
+  kube-client-agent                              quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3be1535007e1c89bccbd9d30add9056808bfc7db777915c7174b9e4aebd2e5b9
+  kube-etcd-signer-server                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e747cb0d28615975c9e04a2b91d49f8023221e83d4cc84ce72afea71b19f4b1f
+  kube-proxy                                     quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:308674f58dfed662cebdab8d8f23c0a02445a61eb1f7c48fbab72c4c31ca7799
+  kube-rbac-proxy                                quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:20b05e77a1d13d95794a1918b0d655a121c4c8c07b3d1b49b222adfefbcf2d0e
+  kube-state-metrics                             quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:07aa8f12eb6d85dc26fe0c90075afde27f458cdfe086eb617316ee091473ebe9
+  kube-storage-version-migrator                  quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:707204817ab051df1b2e5585ccb666b0953419efb8aa5d38ea21bb00a9a706be
+  kuryr-cni                                      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:32d87fcdcecd5b3977ffa976cad8aeb2f53c6585dc413894b71a1b32de8f33a5
+  kuryr-controller                               quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ee60526ccc8d05985fa6ae26cf7a05ce3cd19fb37ac9dffab17f19b422fd45cc
+  libvirt-machine-controllers                    quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:dace92f917dd217fc48a5df8de107fb6110faf3b9c7e6f2031c1d9ebea3ec6b9
+  local-storage-static-provisioner               quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:d5d54e27ac7827d6a590229d2696124e1b347f781cc9102cc042041211566120
+  machine-api-operator                           quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2df3406331b3f833eddcb3c999413f3a06a089c66f9f05bab9ed368c08233cc8
+  machine-config-operator                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:cece262a834cd035c46c26222bdd3782f745ad86fedd964e64f6c51e4cb35f78
+  machine-os-content                             quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:538697a843f171e9a0c5de6e8267de399249cdd94fb1f900434b546ed2531a1a
+  mdns-publisher                                 quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:443565dc71cd64bcf00ba38ac48d13ab1eda403536c149f068dbd72a343554d8
+  multus-admission-controller                    quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8a06cdc02a8a16ebe234aeb97e1cd3c2e4d295972b54f70a1b22789e6abb67b4
+  multus-cni                                     quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f042abf896c7afa1f7dc5d09367462a636167c8301fcbe1d7129cebe1a472e60
+  multus-route-override-cni                      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b4c58cc6a51f5a0109eb4a652853b19f4459aa6e4064923d31f3d7c4894fc56e
+  multus-whereabouts-ipam-cni                    quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e43ddb69be4bc8dc66c58964e6ff2d378990be442ae047a831234b2c27d48264
+  must-gather                                    quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:07a2ab266f2c0302f0a75009140e87f1e53d17a512fa6ffffd336791dba842e3
+  oauth-proxy                                    quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6b939dac9b5145a2d1d65284155a881c0fb48566a24c0a1428f9a85703b516ae
+  oauth-server                                   quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0f998203a8df76c0cfbc2f2dabbcbfe1bd7f39239f7ab6f3c7065046494422ad
+  openshift-apiserver                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17cfd5010326d1ec32542d93e9c67ad0787616bc3340166f31e4d756601ed7bc
+  openshift-controller-manager                   quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:06df0c94f05bea942cc90cb5ed94a89f5d887c361133117574f6142690eede76
+  openshift-state-metrics                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2027d1b0fd63ce6f80513ac94aa78b93460e806ff78ae4faec0962a9f8e1d7f3
+  openstack-machine-controllers                  quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f3027f60e4a163c0cbff4878fcb3f66f6524ffc8b979440a0e8e64e3d6e82916
+  operator-lifecycle-manager                     quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:33dafac4e1fa46baef2d7a8e2db1bd32fa7c524e9f9341cbd9a572af71b1ea04
+  operator-marketplace                           quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:515620391b7068a54cca5ee7d61e593070451c5329aff5c103fd73bcf15ce249
+  operator-registry                              quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:995982f3b3c9a5f5e5cabebf148562586b1d8dc2f29fb1752c92adc07be86d5a
+  ovirt-machine-controllers                      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:59c7af9eea5545b8deebe4e86fa90b8920e43ab0569723c4c590873c306f8bb4
+  ovn-kubernetes                                 quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:69acb958c6b254fb826e3d4f563b2e95c34cab6d28c7ef48b24c1699191cd8b4
+  pod                                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e5b8314746c23e09349e5614cd20c09129dddd02cfd8bbcdf3db17b9fa63a51f
+  prom-label-proxy                               quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:830d71cecebd3a8031bae8e318801af64f5fcfa2554fc3378bc65563a6af18d9
+  prometheus                                     quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:78bf348b7615b7f8090fbd6f32cfe631f293f4e2ad8de06a1190e332def5cf21
+  prometheus-alertmanager                        quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:de834bda891dc7fae685925319434c0a20b4c3da3ac70caf6fa1d67e095f2ae1
+  prometheus-config-reloader                     quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6369b5a3ea39ed2773d0c4212172200c6bd23db89118c2c4ce905f22ea68f1f4
+  prometheus-node-exporter                       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f447197928713741daf33b4d8f5f98b692f2e16f6b01dbcf8290a9de84f25a1e
+  prometheus-operator                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6d30a7be5f92396b403681ef6693a8b857712a109d057b6e5236a759137ede56
+  sdn                                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b89ba166f65f9a9066254f9020515504272dd7f2234a380559e4ca988749a6ab
+  service-ca-operator                            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ac5fcfcbc20d02357529d3cd43dad907bb02dc72aea5021e56307698e4d7ed5f
+  telemeter                                      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:4bdaf51c5f4f77a0005a482d6983237204449cd5034c0095fa3adb38fe0ce463
+  tests                                          quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6e7b2b8d304550840c183976164bb8b1ecf76f254d4fe470972745a604936496
+  thanos                                         quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b24c1274983593a5d351401bec0f30759c0e8d559a0906f25695110989cfcd5e
+  tools                                          quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:949bead30614c4060f075a1b134f5412a7902990419db9c982f73fd840113e18
+

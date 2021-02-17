@@ -1,0 +1,6 @@
+e3bbab9aaa5dd2af73d8e296cc8f3b5f625998f99c310802ef52f8caf874601a  openshift-client-linux-4.4.0-0.nightly-ppc64le-2020-01-25-021319.tar.gz
+f481723915140d5953564cb33be886ff2ff72d3a7459c4dca55761db25531407  openshift-client-mac-4.4.0-0.nightly-ppc64le-2020-01-25-021319.tar.gz
+f9cc62a91975928937216d7bb157fb31e92e2fcaee656d3a2ddbcb7c5e11a212  openshift-client-windows-4.4.0-0.nightly-ppc64le-2020-01-25-021319.zip
+3c3de2615b346ca94f519befe30905f35618c8c50122e44e04c1e61ac192170c  openshift-install-linux-4.4.0-0.nightly-ppc64le-2020-01-25-021319.tar.gz
+28065078447ec7111a7df2939038a445f46a72d5c00eccaebcc64e28d0cc6b26  openshift-install-mac-4.4.0-0.nightly-ppc64le-2020-01-25-021319.tar.gz
+17153b70ee0169319603bbdaef90ef2318dbbed987c4256ce223d27068434816  release.txt
