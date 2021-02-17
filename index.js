@@ -19,7 +19,7 @@ const PROJECT_NAME = "eyebrowse";
 
 const mongoUri = `mongodb://${envs.mongo.user || ""}${
   envs.mongo.user && envs.mongo.password
-    ? `:${encodeURIComponent(envs.mongo.password)}:`
+    ? `:${encodeURIComponent(envs.mongo.password)}@`
     : ""
 }${envs.mongo.host}:${envs.mongo.port}/${envs.mongo.database}`;
 
