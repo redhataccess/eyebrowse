@@ -10,16 +10,16 @@ The openshift-install binary has been preconfigured to install the following rel
 
 ---
 
-Name:      4.4.0-0.nightly-ppc64le-2020-02-01-022127
+Name:      4.4.0-0.nightly-x86_64-2020-02-01-022127
 Digest:    sha256:9399fef88a12638af406ac3430289c05e7704d18e29e7ecd0aac037f66063ba3
 Created:   2020-02-01T02:22:59Z
-OS/Arch:   linux/ppc64le
+OS/Arch:   linux/x86_64
 Manifests: 418
 
 Pull From: quay.io/openshift-release-dev/ocp-release-nightly@sha256:9399fef88a12638af406ac3430289c05e7704d18e29e7ecd0aac037f66063ba3
 
 Release Metadata:
-  Version:  4.4.0-0.nightly-ppc64le-2020-02-01-022127
+  Version:  4.4.0-0.nightly-x86_64-2020-02-01-022127
   Upgrades: <none>
 
 Component Versions:

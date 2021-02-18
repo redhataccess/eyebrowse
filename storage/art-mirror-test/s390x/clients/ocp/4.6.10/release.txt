@@ -13,7 +13,7 @@ The openshift-install binary has been preconfigured to install the following rel
 Name:      4.6.10
 Digest:    sha256:9709d711c93d208562b980482b8696dfd64a0b7433cfc2cd13ced79e8ba08605
 Created:   2021-01-08T02:31:17Z
-OS/Arch:   linux/ppc64le
+OS/Arch:   linux/s390x
 Manifests: 444
 
 Pull From: quay.io/openshift-release-dev/ocp-release@sha256:9709d711c93d208562b980482b8696dfd64a0b7433cfc2cd13ced79e8ba08605

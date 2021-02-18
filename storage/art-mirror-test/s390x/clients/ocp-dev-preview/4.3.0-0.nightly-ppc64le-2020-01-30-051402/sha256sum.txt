@@ -1,6 +1,6 @@
-0d0d78c505175628ee36dd4f50ac4d1f0d1fcbf9e36505a698a69d62f8080141  openshift-client-linux-4.3.0-0.nightly-ppc64le-2020-01-30-051402.tar.gz
-88e933b919ad2ec49c73c23cd043d44ed9a21664d17e88ad79c498bd62385ae9  openshift-client-mac-4.3.0-0.nightly-ppc64le-2020-01-30-051402.tar.gz
-db28f23b28975dd2ba173e5ca307b61903b873232187c3dcbf9446bc19317e81  openshift-client-windows-4.3.0-0.nightly-ppc64le-2020-01-30-051402.zip
-11dc7e59ae4d86715b7da09d4eef53ece984903fb91d8337b9c0161b4da50edd  openshift-install-linux-4.3.0-0.nightly-ppc64le-2020-01-30-051402.tar.gz
-dc61f618c2e305ad1a593593c603ecb0458324282fdccb747ef2965e4b191555  openshift-install-mac-4.3.0-0.nightly-ppc64le-2020-01-30-051402.tar.gz
+0d0d78c505175628ee36dd4f50ac4d1f0d1fcbf9e36505a698a69d62f8080141  openshift-client-linux-4.3.0-0.nightly-s390x-2020-01-30-051402.tar.gz
+88e933b919ad2ec49c73c23cd043d44ed9a21664d17e88ad79c498bd62385ae9  openshift-client-mac-4.3.0-0.nightly-s390x-2020-01-30-051402.tar.gz
+db28f23b28975dd2ba173e5ca307b61903b873232187c3dcbf9446bc19317e81  openshift-client-windows-4.3.0-0.nightly-s390x-2020-01-30-051402.zip
+11dc7e59ae4d86715b7da09d4eef53ece984903fb91d8337b9c0161b4da50edd  openshift-install-linux-4.3.0-0.nightly-s390x-2020-01-30-051402.tar.gz
+dc61f618c2e305ad1a593593c603ecb0458324282fdccb747ef2965e4b191555  openshift-install-mac-4.3.0-0.nightly-s390x-2020-01-30-051402.tar.gz
 7bedea6e27b76d5c7619d9a2a408b17427f997a5fba8fffb6d2f94129e527251  release.txt
