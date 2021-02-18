@@ -51,6 +51,8 @@ Eyebrowse is configured with the following environment variables.
  - `EYEBROWSE_MONGO_USER` - The mongodb user.  Default: none.
  - `EYEBROWSE_MONGO_PASSWORD` - The user's password to use.  Default: none.
 
+ - `EYEBROWSE_DISPLAY_HIDDEN` - Whether or not to display files whose names begin with `.`, such as `.htaccess`.  Enable with `EYEBROWSE_DISPLAY_HIDDEN=true`.  Default: `false`.
+
 These environment variables can be set as normal, _or_ placed into a `.env` file at the root of the project.  The latter is a better option for local development than production.
 
 ### Configuring the client
